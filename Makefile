@@ -1,4 +1,4 @@
-SOURCE  = draft-huque-dnsop-grease
+SOURCE  = draft-ietf-dnsop-grease
 
 all:	$(SOURCE).txt $(SOURCE).html
 
