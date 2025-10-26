@@ -30,7 +30,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
         category="info" consensus="true"
-        docName="draft-ietf-dnsop-grease-00"
+        docName="draft-ietf-dnsop-grease-01"
         ipr="trust200902" updates="" obsoletes=""
         submissionType="IETF" xml:lang="en"
         tocInclude="true" tocDepth="4"
@@ -43,7 +43,7 @@
     <title abbrev="DNS Greasing">
        Greasing Protocol Extension Points in the DNS
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dnsop-grease-00"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dnsop-grease-01"/>
 
     <author fullname="Shumon Huque" initials="S." surname="Huque">
       <organization>Salesforce</organization>
@@ -59,7 +59,7 @@
       </address>
     </author>
 
-    <date day="16" month="10" year="2024"/>
+    <date day="03" month="03" year="2025"/>
     <!-- Meta-data Declarations -->
 
     <area>General</area>
@@ -291,6 +291,36 @@
         <li>Tests should be able to be individually disabled.</li>
         <li>Sharing telemetry.</li>
       </ul>
+    </section>
+
+    <section anchor="from-responder" numbered="true" toc="default">
+      <name>Greasing Initiated By DNS Responders</name>
+      <t>
+        This document largely focusses on greasing initiated by
+        the DNS resolver or querier. Greasing operations could also
+        be initiated by an authoritative server or DNS responder.
+        This seems potentially a bit more fraught, since the responder
+        cannot necessarily know what the result of the greasing action
+        was, e.g., did the querier accept the answer with no problems,
+        did it not accept it and retry other servers, did it not not
+        accept it and just fail, causing a denial of service to the
+        downstream application, etc. However, greasing in this direction
+        can be very helpful in targeted experiments. For example, some
+        early measurements for DELEG proposals utilized server side
+        greasing to insert unexpected record types in referral responses
+        to test the behavior of DNS resolvers. Operators of DNS zones
+        could perform targeted active measurements or rely on reports
+        by users to determine if server side greasing works well.
+      </t>
+      <t>
+        Some things a responder could do include: test setting the
+        final DNS header flag (Z), send back unknown EDNS header flags,
+        options. higher EDNS versions etc. All of these should in theory
+        be ignored on reception.
+      </t>
+      <t>
+        Greasing by DNS responders should be disabled by default.
+      </t>
     </section>
 
     <section anchor="security" numbered="true" toc="default">
