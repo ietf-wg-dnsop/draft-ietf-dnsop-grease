@@ -30,7 +30,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
         category="info" consensus="true"
-        docName="draft-ietf-dnsop-grease-01"
+        docName="draft-ietf-dnsop-grease-02"
         ipr="trust200902" updates="" obsoletes=""
         submissionType="IETF" xml:lang="en"
         tocInclude="true" tocDepth="4"
@@ -43,7 +43,7 @@
     <title abbrev="DNS Greasing">
        Greasing Protocol Extension Points in the DNS
     </title>
-    <seriesInfo name="Internet-Draft" value="draft-ietf-dnsop-grease-01"/>
+    <seriesInfo name="Internet-Draft" value="draft-ietf-dnsop-grease-02"/>
 
     <author fullname="Shumon Huque" initials="S." surname="Huque">
       <organization>Salesforce</organization>
@@ -59,7 +59,7 @@
       </address>
     </author>
 
-    <date day="03" month="03" year="2025"/>
+    <date day="02" month="11" year="2025"/>
     <!-- Meta-data Declarations -->
 
     <area>General</area>
