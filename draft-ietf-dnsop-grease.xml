@@ -131,10 +131,10 @@
       </t>
       <t>
         Remarkably, the Extension Mechanisms for DNS (EDNS)
-        specification,
-        <xref target="RFC2671">originally published in 1999</xref>,
-        is still not universally deployed, and often deployed
-        incorrectly or incompletely. This eventually resulted in
+        specification, originally published in 1999
+        <xref target="RFC2671" /> and later updated by
+        <xref target="RFC6891" />, is still not universally deployed,
+        and often deployed incorrectly or incompletely. This eventually resulted in
         the exercise of a <xref target="FLAGDAY">DNS Flag Day effort</xref>
         to identify and eradicate implementations and network paths not
         compliant with the specification. Tools like ednscomp.isc.org
