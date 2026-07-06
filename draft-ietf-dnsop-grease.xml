@@ -226,9 +226,9 @@
         handling of unknown code points whether they fall in a
         reserved range or not. But there is a slight risk that the
         reserved values could then become ossified in implementations.
-        Furthermore, Some DNS protocol elements have only a small range
+        Furthermore, some DNS protocol elements have only a small range
         of supported values, and it may not be practical to reserve a
-        a subset of such ranges. Some larger ranges also have a sub
+        subset of such ranges. Some larger ranges also have a sub
         structure, such as the data vs meta vs q-type classification
         of the RR-type space, where multiple greasing ranges would need
         to be reserved.
@@ -302,7 +302,7 @@
         This seems potentially a bit more fraught, since the responder
         cannot necessarily know what the result of the greasing action
         was, e.g., did the querier accept the answer with no problems,
-        did it not accept it and retry other servers, did it not not
+        did it not accept it and retry other servers, did it not
         accept it and just fail, causing a denial of service to the
         downstream application, etc. However, greasing in this direction
         can be very helpful in targeted experiments. For example, some
@@ -315,7 +315,7 @@
       <t>
         Some things a responder could do include: test setting the
         final DNS header flag (Z), send back unknown EDNS header flags,
-        options. higher EDNS versions etc. All of these should in theory
+        options, higher EDNS versions, etc. All of these should in theory
         be ignored on reception.
       </t>
       <t>
