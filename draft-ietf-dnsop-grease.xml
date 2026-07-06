@@ -156,19 +156,35 @@
         listed in the table below.
       </t>
 
+      <!-- NOTE: The "Unallocated (approx.)" figures below are estimates
+           and MUST be verified against the current IANA registries before
+           publication. In particular: Opcode (0,2,4,5,6 assigned, 1
+           obsolete), EDNS Header Flags (DO and CO assigned), and the
+           reserved/private-use/experimental sub-ranges of the RR Type and
+           EDNS Opt Code spaces. -->
       <table>
         <thead>
-          <tr><th>Protocol Element</th><th>Size</th><th>Number of Values</th></tr>
+          <tr><th>Protocol Element</th><th>Field Size</th><th>Total Code Points</th><th>Unallocated (approx.)</th></tr>
         </thead>
         <tbody>
-          <tr><td>DNS Header Flags</td><td>7-bits</td><td>7</td></tr>
-          <tr><td>Resource Record Type</td><td>16-bits</td><td>65,536</td></tr>
-          <tr><td>Opcode</td><td>4-bits</td><td>16</td></tr>
-          <tr><td>EDNS Version</td><td>8-bits</td><td>256</td></tr>
-          <tr><td>EDNS Header Flags</td><td>16-bits</td><td>16</td></tr>
-          <tr><td>EDNS Opt Code</td><td>16-bits</td><td>65,536</td></tr>
+          <tr><td>DNS Header Flags</td><td>1-bit each</td><td>7 flag positions</td><td>1</td></tr>
+          <tr><td>Opcode</td><td>4-bit</td><td>16</td><td>10</td></tr>
+          <tr><td>EDNS Version</td><td>8-bit</td><td>256</td><td>255</td></tr>
+          <tr><td>EDNS Header Flags</td><td>1-bit each</td><td>16 flag positions</td><td>~14</td></tr>
+          <tr><td>Resource Record Type</td><td>16-bit</td><td>65,536</td><td>~64,700</td></tr>
+          <tr><td>EDNS Opt Code</td><td>16-bit</td><td>65,536</td><td>~65,000</td></tr>
         </tbody>
       </table>
+
+      <t>
+        The unallocated column indicates roughly how many code points are
+        currently available for greasing, and it varies enormously across
+        protocol elements. Note that the header flag fields are not single
+        multi-bit code points but collections of independent 1-bit flags,
+        so their totals count flag positions rather than 2^n values. These
+        counts are approximate and subject to change as IANA allocations
+        proceed.
+      </t>
 
       <t>
         The goals of periodically exercising the use of unallocated
