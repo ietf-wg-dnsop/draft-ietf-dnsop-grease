@@ -218,6 +218,19 @@
         new queries are constructed (for example, greasing new resource
         record types).
       </t>
+      <t>
+        Where the additional latency of retrying failed queries is a
+        concern, a resolver could instead issue the queries in parallel:
+        a regular query without any greasing, alongside a separate greased
+        query. The response to the regular query is used to serve the
+        resolution as usual, while the outcome of the greased query is
+        recorded purely for telemetry purposes. This avoids adding latency
+        to the resolution when a greased query fails, at the cost of
+        additional query volume. As with the sampled approach described in
+        <xref target="sampling" />, only a small fraction of queries need
+        be duplicated in this way to obtain a useful picture of
+        non-compliant servers.
+      </t>
     </section>
 
     <section anchor="reserving" numbered="true" toc="default">
