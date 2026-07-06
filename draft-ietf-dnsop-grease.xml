@@ -254,26 +254,80 @@
         they send out.
       </t>
       <t>
-        Resolvers could select randomly from the unallocated
-        range, but then would have to consider what happens when such
-        code points are allocated in the future and whether or not that
-        will give rise to a different class of interoperability failure.
-        One possible way to deal with this is for software to have
-        pre-configured or configurable end-of-test dates.
+        The choice between reserving a dedicated range of code points for
+        greasing and simply selecting at random from the unallocated space
+        involves several competing considerations, and the right answer may
+        differ from one protocol element to another.
       </t>
       <t>
-        Alternatively, a subset of the currently unused values could
-        be reserved for DNS resolver implementations to advertise at
-        random. The expectation is that receivers will have uniform
-        handling of unknown code points whether they fall in a
-        reserved range or not. But there is a slight risk that the
-        reserved values could then become ossified in implementations.
-        Furthermore, some DNS protocol elements have only a small range
-        of supported values, and it may not be practical to reserve a
-        subset of such ranges. Some larger ranges also have a sub
-        structure, such as the data vs meta vs q-type classification
-        of the RR-type space, where multiple greasing ranges would need
-        to be reserved.
+        Arguments in favor of reserving a range include:
+      </t>
+      <ul spacing="normal">
+        <li>
+          <strong>Detectability.</strong> If a receiver actively
+          special-cases and ignores a known reserved grease range, that
+          behavior becomes observable, whereas an implementation that
+          silently drops any unknown value is harder to distinguish from
+          one that is behaving correctly. In this sense, a receiver that
+          mishandles the reserved range is itself a useful signal that
+          greasing is doing its job.
+        </li>
+        <li>
+          <strong>Avoiding collisions with real values.</strong> Selecting
+          at random from the entire unallocated space risks exercising a
+          code point that is later allocated for genuine use. Deployed
+          software that has learned to ignore that value during greasing
+          may then mishandle it once it carries real meaning. A reserved
+          range quarantines greasing values away from points that may be
+          assigned in the future.
+        </li>
+      </ul>
+      <t>
+        Arguments against reserving a range include:
+      </t>
+      <ul spacing="normal">
+        <li>
+          <strong>Ossification of the reserved range itself.</strong> If
+          implementations hardcode the notion of "the grease range" and
+          treat it specially, rather than handling all unknown code points
+          uniformly, the reserved values can become ossified in exactly the
+          way greasing is meant to prevent.
+        </li>
+        <li>
+          <strong>Limited effectiveness against a determined
+          implementation.</strong> An implementation that wishes to single
+          out and ignore greasing can do so regardless of whether the
+          values are drawn from a reserved range or the full unallocated
+          space; the size of the reserved range does not materially change
+          this. Reserving primarily aids diagnosis and avoids accidental
+          collisions rather than defeating deliberate special-casing.
+        </li>
+        <li>
+          <strong>Element-specific constraints.</strong> Some DNS protocol
+          elements have only a small range of values (see the table in
+          <xref target="opportunities" />) and cannot readily spare a
+          subset for reservation; for these, random selection or forgoing
+          greasing may be the only practical options. Others have internal
+          structure, such as the data/meta/QTYPE classification of the RR
+          Type space, where a single reserved range would not exercise each
+          sub-range; reserving for these elements is still feasible but
+          would require designating multiple ranges.
+        </li>
+      </ul>
+      <t>
+        The concern about random selection colliding with future real
+        allocations can be mitigated without a reserved range by equipping
+        greasing implementations with a pre-configured or configurable
+        end-of-test date, after which a given greasing operation is retired
+        so that it does not interfere with subsequent code point
+        assignments. The amount of the space to reserve, if any, might also
+        be informed empirically by the observed frequency of greasing
+        traffic.
+      </t>
+      <t>
+        [The working group has not yet reached consensus on whether to
+        reserve ranges, and if so for which protocol elements. This section
+        will be updated to record that decision.]
       </t>
     </section>
 
